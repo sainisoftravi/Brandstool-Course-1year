@@ -102,22 +102,17 @@ If you prefer a clean web interface with real-time status and ON/OFF buttons:
 
 ---
 
-## Loading the Extension in the Browser
+## Automatic Extension & Password Persistence
 
-Once you have opened the browser at `http://localhost:3000`:
+### 1. Automatic Extension Loading (Zero Setup)
+The extension is now mounted directly to `/usr/share/chromium/extensions/brandseotool` in `docker-compose.yml`. Chromium will **automatically load the extension on every startup**. You no longer need to manually go to `chrome://extensions` or click "Load unpacked"!
 
-1. Open a new tab and navigate to:
-   ```
-   chrome://extensions
-   ```
-2. Toggle **Developer mode** in the top-right corner.
-3. Click **Load unpacked** in the top-left.
-4. In the file picker, select the mounted directory:
-   ```
-   /extension
-   ```
-5. Click **Select Folder / Open**.
-6. The extension is now active. Navigate to `https://tools.brandseotool.com/`, log in, and launch your course tools (Udemy, Coursera, Skillshare).
+### 2. Password Saving (SQLite Basic Store)
+In containerized Linux Chromium, password saving normally fails because there is no system desktop keyring (GNOME Keyring / KWallet). We have configured:
+- `--password-store=basic` and `--enable-features=PasswordManager` in `docker-compose.yml`.
+- Enabled `credentials_enable_service: true` in your Chromium profile.
+
+Chromium will now prompt you to save passwords and store them securely in your persistent `./chrome-data/` folder across all restarts.
 
 ---
 
