@@ -1,0 +1,10 @@
+# Browser profile & cache data
+chrome-data/
+
+# Node modules
+node_modules/
+
+# OS and log files
+*.log
+Thumbs.db
+.DS_Store

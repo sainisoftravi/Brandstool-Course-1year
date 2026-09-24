@@ -1,0 +1,59 @@
+{
+    "name": "Brandseotool-Extension [Manifest v3]",
+    "description": "Simple yet powerful Seo And Etc Tools, 1 Click Access",
+    "version": "3.0.1",
+    "manifest_version": 3,
+    "icons": {
+      "128": "./icons/icon.png"
+    },
+    "action": {
+      "default_icon": "./icons/icon.png"
+    },
+    "background": {
+      "service_worker": "./src/bg.js",
+      "type": "module"
+    },
+    "content_scripts": [
+      {
+        "matches": [
+          "https://tools.brandseotool.com/*",
+          "http://tools.brandseotool.com/*"
+        ],
+        "js": ["./src/content.js"],
+        "run": "document_end"
+      },
+      {
+        "matches": ["https://*/*"],
+        "js": ["./src/content_all.js"],
+        "run": "document_start",
+        "excludeMatches": [
+          "https://tools.brandseotool.com/*",
+          "http://tools.brandseotool.com/*"
+        ]
+      }
+    ],
+    "permissions": [
+      "tabs",
+      "storage",
+      "unlimitedStorage",
+      "activeTab",
+      "cookies",
+      "management",
+      "proxy",
+      "scripting",
+      "webRequest",
+      "webNavigation",
+      "webRequestAuthProvider",
+      "declarativeNetRequest",
+      "declarativeNetRequestFeedback",
+      "declarativeNetRequestWithHostAccess"
+    ],
+    "devtools_page": "default.html",
+    "host_permissions": [
+      "http://*/*",
+      "https://*/*"
+    ],
+    "incognito": "spanning",
+    "author": "Ariful Islam<arifulislamsobuj31@gmail.com>"
+  }
+  
