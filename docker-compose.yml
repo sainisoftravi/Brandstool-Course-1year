@@ -8,13 +8,16 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      - CHROME_CLI=--password-store=basic --enable-features=PasswordManager https://tools.brandseotool.com/
+      - CHROME_CLI=--load-extension=/extension --password-store=basic --enable-features=PasswordManager https://tools.brandseotool.com/
     volumes:
-      - ./chrome-data:/config
+      - chromium-data:/config
+      - ./downloads:/config/Downloads
       - ./:/extension:ro
-      - ./:/usr/share/chromium/extensions/brandseotool:ro
     ports:
       - "3000:3000"
       - "3001:3001"
     shm_size: "2gb"
     restart: unless-stopped
+
+volumes:
+  chromium-data:
