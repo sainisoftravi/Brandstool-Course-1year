@@ -1,0 +1,63 @@
+
+services:
+  chrome-user1:
+    image: lscr.io/linuxserver/chrome:latest
+    container_name: brandseotool-user1
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
+      - CHROME_CLI=--load-extension=/extension --password-store=basic --enable-features=PasswordManager https://tools.brandseotool.com/
+    volumes:
+      - chrome-user1-data:/config
+      - ./extension:/extension:ro
+      - ./downloads/user1:/config/Downloads
+    ports:
+      - "3001:3001"
+    shm_size: "2gb"
+    restart: unless-stopped
+
+  chrome-user2:
+    image: lscr.io/linuxserver/chrome:latest
+    container_name: brandseotool-user2
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
+      - CHROME_CLI=--load-extension=/extension --password-store=basic --enable-features=PasswordManager https://tools.brandseotool.com/
+    volumes:
+      - chrome-user2-data:/config
+      - ./extension:/extension:ro
+      - ./downloads/user2:/config/Downloads
+    ports:
+      - "3101:3001"
+    shm_size: "2gb"
+    restart: unless-stopped
+
+  chrome-user3:
+    image: lscr.io/linuxserver/chrome:latest
+    container_name: brandseotool-user3
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
+      - CHROME_CLI=--load-extension=/extension --password-store=basic --enable-features=PasswordManager https://tools.brandseotool.com/
+    volumes:
+      - chrome-user3-data:/config
+      - ./extension:/extension:ro
+      - ./downloads/user3:/config/Downloads
+    ports:
+      - "3201:3001"
+    shm_size: "2gb"
+    restart: unless-stopped
+
+volumes:
+  chrome-user1-data:
+  chrome-user2-data:
+  chrome-user3-data:
